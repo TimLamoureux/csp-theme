@@ -1,0 +1,38 @@
+test
+
+{has_bookings}
+<div id="event-bookings" style="float:right;width:33%">
+    <div>
+        <h2>Attending (#_BOOKEDSPACES/#_SPACES)</h2>
+        #_ATTENDEES
+    </div>
+    <div>
+        <h3>Bookings</h3>
+        #_BOOKINGFORM
+    </div>
+</div>
+{/has_bookings}
+<p>
+    <strong>Date/Time WAHOOO!</strong><br/>
+    Date(s) - #_EVENTDATES<br /><i>#_EVENTTIMES</i>
+</p>
+{has_location}
+<p>
+    <strong>Location</strong><br/>
+    #_LOCATIONLINK
+</p>
+{/has_location}
+<p>
+    <strong>Categories</strong>
+    #_CATEGORIES
+</p>
+<br style="clear:both" />
+#_EVENTNOTES
+
+<div id="event-map">#_LOCATIONMAP</div>
+
+<div id="add-to-calendar" style="display: none;">
+    <h5>Add to my calendar</h5>
+    #_EVENTGCALLINK
+    #_EVENTWEBCALLINK
+</div>
