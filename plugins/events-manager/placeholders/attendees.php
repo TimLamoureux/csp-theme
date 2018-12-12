@@ -18,14 +18,16 @@ $can_book = is_user_logged_in() || ( get_option( 'dbem_bookings_anonymous' ) && 
 			?>
             <h3 title="<?php echo( $ticket->description ); ?>">
 				<?php
-				printf( '%s',
-					$ticket->ticket_name
+				printf( '%s (%d/%d)',
+					$ticket->ticket_name,
+					count($bookings->bookings),
+                    $bookings->get_spaces()
 				);
 				?>
             </h3>
             <ul>
-				<?php if ( $bookings->get_booked_spaces() <= 0 ) : ?>
-                    <li style="list-style-type:none"><?php _e( 'No one has registered yet', 'ysp' ); ?></li>
+				<?php if ( count($bookings->bookings) <= 0 ) : ?>
+                    <li style="list-style-type:none"><?php printf( __( 'No %s has registered yet', 'ysp' ), $ticket->ticket_name ); ?></li>
 				<?php else: ?>
 					<?php foreach ( $bookings as $booking ): ?>
                         <li style="list-style-type:none"><?php printf( "%s %s",
@@ -54,15 +56,15 @@ $can_book = is_user_logged_in() || ( get_option( 'dbem_bookings_anonymous' ) && 
 		?>
         <ul class="event-attendees">
 			<?php
-			foreach ( $EM_Bookings as $EM_Booking ) {
-				/* @var $EM_Booking EM_Booking */
-				if ( $EM_Booking->booking_status == 1 && ! in_array( $EM_Booking->get_person()->ID, $people ) ) {
-					$people[] = $EM_Booking->get_person()->ID;
-					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . ' ' . $EM_Booking->get_person()->first_name . " " . $EM_Booking->get_person()->last_name . '</li>';
-				} elseif ( $EM_Booking->booking_status == 1 && $EM_Booking->is_no_user() ) {
-					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . '</li>';
-				}
-			}
+//			foreach ( $EM_Bookings as $EM_Booking ) {
+//				/* @var $EM_Booking EM_Booking */
+//				if ( $EM_Booking->booking_status == 1 && ! in_array( $EM_Booking->get_person()->ID, $people ) ) {
+//					$people[] = $EM_Booking->get_person()->ID;
+//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . ' ' . $EM_Booking->get_person()->first_name . " " . $EM_Booking->get_person()->last_name . '</li>';
+//				} elseif ( $EM_Booking->booking_status == 1 && $EM_Booking->is_no_user() ) {
+//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . '</li>';
+//				}
+//			}
 			?>
         </ul>
 		<?php
