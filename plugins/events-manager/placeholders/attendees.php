@@ -24,7 +24,7 @@ $can_book = is_user_logged_in() || ( get_option( 'dbem_bookings_anonymous' ) && 
 				?>
             </h3>
             <ul>
-				<?php if ( ! $bookings->has_booking() ) : ?>
+				<?php if ( $bookings->get_booked_spaces() <= 0 ) : ?>
                     <li style="list-style-type:none"><?php _e( 'No one has registered yet', 'ysp' ); ?></li>
 				<?php else: ?>
 					<?php foreach ( $bookings as $booking ): ?>
