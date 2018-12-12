@@ -21,7 +21,7 @@ $can_book = is_user_logged_in() || ( get_option( 'dbem_bookings_anonymous' ) && 
 				printf( '%s (%d/%d)',
 					$ticket->ticket_name,
 					count($bookings->bookings),
-                    $bookings->get_spaces()
+                    $ticket->get_spaces()
 				);
 				?>
             </h3>
