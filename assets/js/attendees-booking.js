@@ -5,6 +5,7 @@ jQuery(document).ready(function($) {
 
         var data = {
             'action': 'booking_add',
+            'em_ajax': true,
             'whatever': ajax_object.we_value
         };
 

@@ -2,8 +2,15 @@
 require_once( get_stylesheet_directory() . '/functions/events-manager-attendees.php' );
 do_action('wcm_attendees_script');
 
-$can_book = is_user_logged_in() || ( get_option( 'dbem_bookings_anonymous' ) && ! is_user_logged_in() );
-
+$can_book1 = (
+        is_user_logged_in() ||
+        ( get_option( 'dbem_bookings_anonymous' ) && ! is_user_logged_in() )
+);
+$can_book2 = (
+        get_option('dbem_bookings_double') ||
+        !$EM_Event->get_bookings()->has_booking(get_current_user_id())
+);
+$can_book = $can_book1 && $can_book2;
 
 ?>
 <?php if ( $EM_Event->event_rsvp ): ?>
