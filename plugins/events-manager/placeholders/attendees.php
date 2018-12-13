@@ -37,7 +37,7 @@ $can_book = $can_book1 && $can_book2;
                     <li style="list-style-type:none"><?php printf( __( 'No %s has registered yet', 'ysp' ), $ticket->ticket_name ); ?></li>
 				<?php else: ?>
 					<?php foreach ( $bookings as $booking ): ?>
-						<?php if ( $booking->get_status() == 1 ): ?>
+						<?php if ( $booking->status == 1 ): ?>
                             <li style="list-style-type:none">
 								<?php
 								printf( "%s %s",
