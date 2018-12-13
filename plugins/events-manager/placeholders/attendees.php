@@ -1,14 +1,14 @@
 <?php
 require_once( get_stylesheet_directory() . '/functions/events-manager-attendees.php' );
-do_action('wcm_attendees_script');
+do_action( 'wcm_attendees_script' );
 
 $can_book1 = (
-        is_user_logged_in() ||
-        ( get_option( 'dbem_bookings_anonymous' ) && ! is_user_logged_in() )
+	is_user_logged_in() ||
+	( get_option( 'dbem_bookings_anonymous' ) && ! is_user_logged_in() )
 );
 $can_book2 = (
-        get_option('dbem_bookings_double') ||
-        !$EM_Event->get_bookings()->has_booking(get_current_user_id())
+	get_option( 'dbem_bookings_double' ) ||
+	! $EM_Event->get_bookings()->has_booking( get_current_user_id() )
 );
 $can_book = $can_book1 && $can_book2;
 
@@ -27,19 +27,26 @@ $can_book = $can_book1 && $can_book2;
 				<?php
 				printf( '%s (%d/%d)',
 					$ticket->ticket_name,
-					count($bookings->bookings),
-                    $ticket->get_spaces()
+					$ticket->get_booked_spaces(),
+					$ticket->get_spaces()
 				);
 				?>
             </h3>
             <ul>
-				<?php if ( count($bookings->bookings) <= 0 ) : ?>
+				<?php if ( count( $bookings->bookings ) <= 0 ) : ?>
                     <li style="list-style-type:none"><?php printf( __( 'No %s has registered yet', 'ysp' ), $ticket->ticket_name ); ?></li>
 				<?php else: ?>
 					<?php foreach ( $bookings as $booking ): ?>
-                        <li style="list-style-type:none"><?php printf( "%s %s",
-								get_avatar( $booking->get_person()->ID, 50 ),
-								$booking->person->data->display_name ); ?></li>
+						<?php if ( $booking->get_status() == 1 ): ?>
+                            <li style="list-style-type:none">
+								<?php
+								printf( "%s %s",
+									get_avatar( $booking->get_person()->ID, 50 ),
+									$booking->person->data->display_name
+								);
+								?>
+                            </li>
+						<?php endif; ?>
 					<?php endforeach; ?>
 				<?php endif; ?>
 				<?php if ( $ticket->is_available() && $can_book ) : ?>
@@ -63,15 +70,15 @@ $can_book = $can_book1 && $can_book2;
 		?>
         <ul class="event-attendees">
 			<?php
-//			foreach ( $EM_Bookings as $EM_Booking ) {
-//				/* @var $EM_Booking EM_Booking */
-//				if ( $EM_Booking->booking_status == 1 && ! in_array( $EM_Booking->get_person()->ID, $people ) ) {
-//					$people[] = $EM_Booking->get_person()->ID;
-//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . ' ' . $EM_Booking->get_person()->first_name . " " . $EM_Booking->get_person()->last_name . '</li>';
-//				} elseif ( $EM_Booking->booking_status == 1 && $EM_Booking->is_no_user() ) {
-//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . '</li>';
-//				}
-//			}
+			//			foreach ( $EM_Bookings as $EM_Booking ) {
+			//				/* @var $EM_Booking EM_Booking */
+			//				if ( $EM_Booking->booking_status == 1 && ! in_array( $EM_Booking->get_person()->ID, $people ) ) {
+			//					$people[] = $EM_Booking->get_person()->ID;
+			//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . ' ' . $EM_Booking->get_person()->first_name . " " . $EM_Booking->get_person()->last_name . '</li>';
+			//				} elseif ( $EM_Booking->booking_status == 1 && $EM_Booking->is_no_user() ) {
+			//					echo '<li>' . get_avatar( $EM_Booking->get_person()->ID, 50 ) . '</li>';
+			//				}
+			//			}
 			?>
         </ul>
 		<?php
