@@ -7,5 +7,21 @@ Author URL: https://www.wcubemedia.com
 Template: generatepress
 Version: 1.0.0
 Text Domain: ysp
-*/ 
+*/
 
+.secondary-navigation .menu-toggle {
+    display: none;
+}
+
+@media(max-width: 768px) {
+    .secondary-navigation {
+        text-align: center !important;
+    }
+    .secondary-navigation ul {
+        display: block;
+    }
+    .secondary-navigation .sf-menu>li {
+        float: none;
+        display: inline-block !important;
+    }
+}
