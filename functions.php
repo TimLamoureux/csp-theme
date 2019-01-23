@@ -100,3 +100,10 @@ function ajax_patrollers() {
 
 	die(); //stop "0" from being output
 }
+
+add_action('after_setup_theme', 'remove_admin_bar_users');
+function remove_admin_bar_users() {
+	if (!current_user_can('administrator') && !is_admin()) {
+		show_admin_bar(false);
+	}
+}
