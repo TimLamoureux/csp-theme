@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * Load theme widgets
+ * TODO: Load in a loop
+ */
+require_once( get_stylesheet_directory() . '/widgets/user-bookings-list.php' );
+
+
+
+
+/**
  * Disable mobile menu for secondary navigation
  */
 add_action( 'wp_enqueue_scripts', 'generate_dequeue_secondary_nav_mobile', 999 );
