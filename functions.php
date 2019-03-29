@@ -66,10 +66,12 @@ if ( wp_script_is( 'bp-jquery-cookie', 'enqueued' ) ) {
 // Modifications to WP_Full_Calendar
 require_once( get_stylesheet_directory() . '/functions/wp-fullcalendar.php' );
 
-// Modifications to WP_Full_Calendar
 require_once( get_stylesheet_directory() . '/functions/menus.php' );
 
 require_once( get_stylesheet_directory() . '/functions/events-manager.php' );
+
+//require_once( get_stylesheet_directory() . '/functions/attendance.php' );
+
 
 
 add_filter( 'ass_send_email_args', 'prevent_attendance_email', 50, 2 );
@@ -83,7 +85,7 @@ function prevent_attendance_email( $args, $email_type ) {
 
 
 //get patrollers name for Bookings and Attendance, TODO: Move to separate plugin
-add_action( 'wp_ajax_get_patrollers', 'ajax_patrollers' );
+/*add_action( 'wp_ajax_get_patrollers', 'ajax_patrollers' );
 function ajax_patrollers() {
 	global $wpdb; //get access to the WordPress database object variable
 
@@ -108,7 +110,7 @@ function ajax_patrollers() {
 	echo json_encode( $patrollers );
 
 	die(); //stop "0" from being output
-}
+}*/
 
 add_action('after_setup_theme', 'remove_admin_bar_users');
 function remove_admin_bar_users() {

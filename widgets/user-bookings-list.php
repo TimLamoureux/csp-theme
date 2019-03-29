@@ -95,6 +95,7 @@ class Bookings_List extends WP_Widget {
 		(b.booking_date BETWEEN '2018-12-01' AND '2019-02-01') AND
 		(b.booking_status = 1)
 		GROUP BY b.person_id
+        ORDER BY name ASC
 
 		<?php
 		$query = ob_get_clean();

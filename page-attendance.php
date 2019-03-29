@@ -1,13 +1,8 @@
 <?php
 /**
- * The template for displaying all pages.
- *
- * This is the template that displays all pages by default.
- * Please note that this is the WordPress construct of pages
- * and that other 'pages' on your WordPress site will use a
- * different template.
- *
- * @package GeneratePress
+ * The template for displaying the attendance manager.
+ **
+ * @package CSP-Theme
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
@@ -26,11 +21,18 @@ get_header(); ?>
 			 */
 			do_action( 'generate_before_main_content' );
 
-			do_action( 'output_attendance_form' );
 
-			while ( have_posts() ) : the_post();
 
-				//get_template_part( 'content', 'page-attendance' );
+			while ( have_posts() ) :
+
+                the_post();
+
+                if ( function_exists( 'wpbp_get_template_part') ) {
+					wpbp_get_template_part( CA_TEXTDOMAIN, 'content', 'attendance-manager', true );
+				}
+				else {
+					get_template_part( 'content', 'attendance-manager' );
+                }
 
 				// If comments are open or we have at least one comment, load up the comment template.
 				if ( comments_open() || '0' != get_comments_number() ) : ?>

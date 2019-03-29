@@ -25,3 +25,18 @@ Text Domain: ysp
         display: inline-block !important;
     }
 }
+
+
+/**
+        ATTENDANCE FORM
+ */
+#attendance-container {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+#attendance-list, #attendance-form {
+    flex-grow: 1;
+
+}
