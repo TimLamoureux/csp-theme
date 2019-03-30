@@ -118,3 +118,9 @@ function remove_admin_bar_users() {
 		show_admin_bar(false);
 	}
 }
+
+add_action('generate_after_footer', 'print_template_comment');
+function print_template_comment() {
+	global $template;
+	echo "<!-- Page Template: $template -->\n";
+}
