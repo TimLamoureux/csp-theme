@@ -119,7 +119,7 @@ function remove_admin_bar_users() {
 	}
 }
 
-add_action('generate_after_footer', 'print_template_comment');
+add_action('generate_before_main_content', 'print_template_comment');
 function print_template_comment() {
 	global $template;
 	echo "<!-- Page Template: $template -->\n";
