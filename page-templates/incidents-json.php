@@ -1,5 +1,6 @@
 <?php
 /**
+ * Template Name: Output incidents as JSON
  * Page to retrieve specific incidents
  */
 
