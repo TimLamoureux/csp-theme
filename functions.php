@@ -29,38 +29,42 @@ function theme_scripts() {
 	);
 }
 
-
-// TODO: Implement min in all enqueues
-$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
-require_once( get_stylesheet_directory() . '/functions/conditional_enqueue.php' );
-$conditional_enqueue = new Conditional_Enqueuer();
-if ( wp_script_is( 'bp-jquery-cookie', 'enqueued' ) ) {
-	return;
-} else {
-	$conditional_enqueue->add_script(
-		'bp-jquery-cookie',
-		plugin_dir_url( __FILE__ ) . 'assets/js/jquery-cookie.min.js',
-		array( 'jquery' ),
-		false,
-		true,
-		Conditional_Enqueuer::TYPE_PAGE_TEMPLATE,
-		[
-			'page-templates/page-booking-manage.php'
-		]
-	);
-	// Autocomplete
-	$conditional_enqueue->add_script(
-		'jquery-ui-autocomplete',
-		'',
-		null,
-		null,
-		true,
-		Conditional_Enqueuer::TYPE_PAGE_TEMPLATE,
-		[
-			'page-templates/page-booking-manage.php'
-		]
-	);
+add_action( 'wp_enqueue_scripts', 'conditional_enqueue' );
+function conditional_enqueue() {
+	// TODO: Implement min in all enqueues
+	$min = defined('SCRIPT_DEBUG') && SCRIPT_DEBUG ? '' : '.min';
+	require_once( get_stylesheet_directory() . '/functions/conditional_enqueue.php' );
+	$conditional_enqueue = new Conditional_Enqueuer();
+	if ( wp_script_is( 'bp-jquery-cookie', 'enqueued' ) ) {
+		return;
+	} else {
+		$conditional_enqueue->add_script(
+			'bp-jquery-cookie',
+			plugin_dir_url( __FILE__ ) . 'assets/js/jquery-cookie.min.js',
+			array( 'jquery' ),
+			false,
+			true,
+			Conditional_Enqueuer::TYPE_PAGE_TEMPLATE,
+			[
+				'page-templates/page-booking-manage.php'
+			]
+		);
+		// Autocomplete
+		$conditional_enqueue->add_script(
+			'jquery-ui-autocomplete',
+			'',
+			null,
+			null,
+			true,
+			Conditional_Enqueuer::TYPE_PAGE_TEMPLATE,
+			[
+				'page-templates/page-booking-manage.php'
+			]
+		);
+	}
 }
+
+
 
 
 // Modifications to WP_Full_Calendar
